@@ -5,7 +5,7 @@ mv_ext() {
     done
 }
 
-# ffmpeg required
+# require ffmpeg
 flac2mp3() {
     1=${1:-"128"}
     2=${2:-"*.flac"}
@@ -17,4 +17,12 @@ flac2mp3() {
 dirsize() {
     1=${1:-"."}
     du -s $1/* | sort -rn
+}
+
+# require imagemagick
+pdfinetune() {
+    target=${1:-"*.pdf"}
+    srcd=${2:-"400"}
+    dstd=${3:-"200"}
+    mogrify -density $srcd -normalize -level 10%,90% -density $dstd -units PixelsPerInch $target
 }
