@@ -1,0 +1,3 @@
+# mysh
+
+maybe require zsh
