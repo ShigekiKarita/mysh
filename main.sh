@@ -1,3 +1,17 @@
+#!/usr/bin/env zsh
+
+function usage {
+    this=$(basename ${0})
+    cat <<EOF
+${this} is good
+
+Usage:
+    convert2mp3 128 *.flac  ## using ffmpeg to audio files in current dir
+    dirsize .  ## survey dir sizes
+    pdfinetune *.pdf 400 200 ## refine scanned pdf and convert dpis
+EOF
+}
+
 # convert extension
 mv_ext() {
     for nm in *.${1}; do
@@ -6,7 +20,7 @@ mv_ext() {
 }
 
 # require ffmpeg
-flac2mp3() {
+convert2mp3() {
     1=${1:-"128"}
     2=${2:-"*.flac"}
 
@@ -25,4 +39,41 @@ pdfinetune() {
     srcd=${2:-"400"}
     dstd=${3:-"200"}
     mogrify -density $srcd -normalize -level 10%,90% -density $dstd -units PixelsPerInch $target
+}
+
+copy_pdfs() {
+    if [ $# -ne 2 ]; then
+        cat <<EOF
+Note:
+cp_bibpdf copys PDFs described in Mendeley's bibtex
+Usage:
+    cp_bibpdf {src.bib} {dst_dir}
+EOF
+        exit 1
+    fi
+
+    files=`grep -e "pdf" $1  \
+         | sed 's/^file = {://g' \
+         | sed 's/:pdf},//g'     \
+         | sed 's/\(.*\)/\/\1/g'`
+
+    while read -r line; do
+        echo "$line"
+        cp $line $2
+    done <<< "$files"
+}
+
+convert2pdf() {
+    ext=${2:-"jpg"}
+    dst=${3:-$1}
+    convert "${1}/*.${ext}" "${dst}.pdf"
+}
+
+convert2pdf_all() {
+    dirs=` ls -F | grep / | sed 's/\(.*\)/\1/g' `
+
+    while read -r line; do
+        echo "$line"
+        convert2pdf "$line"
+    done <<< $dirs
 }
