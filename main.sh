@@ -77,3 +77,12 @@ convert2pdf_all() {
         convert2pdf "$line"
     done <<< $dirs
 }
+
+gitzatsu() {
+    git add --all
+    git commit -m "雑なコミット"
+    git push origin master
+}
+
+alias turnoff='xset dpms force off'
+alias turnon='xset dpms force on'
