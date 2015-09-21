@@ -66,12 +66,12 @@ EOF
 convert2pdf() {
     ext=${2:-"jpg"}
     dst=${3:-$1}
+    echo convert "${1}/*.${ext}" "${dst}.pdf"
     convert "${1}/*.${ext}" "${dst}.pdf"
 }
 
 convert2pdf_all() {
-    dirs=` ls -F | grep / | sed 's/\(.*\)/\1/g' `
-
+    dirs=` ls -F | grep / | sed 's/\(.*\)/\1/g' | sed 's/\(.*\)\//\1/g'`
     while read -r line; do
         echo "$line"
         convert2pdf "$line"
