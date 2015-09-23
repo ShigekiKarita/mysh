@@ -12,6 +12,16 @@ Usage:
 EOF
 }
 
+ask_ok() {
+    echo "Are you ok? [Y/n]"
+    read ANSWER
+
+    case $ANSWER in
+        "" | "Y" | "y" | "yes" | "Yes" | "YES" ) echo "YES!!";;
+        * ) echo "NO!!" && exit 1;;
+    esac
+}
+
 # convert extension
 mv_ext() {
     for nm in *.${1}; do
@@ -82,6 +92,21 @@ gitzatsu() {
     git add --all
     git commit -m "雑なコミット"
     git push origin master
+}
+
+ln_version() {
+    src=`ls "${1}" | grep -e "${2}"`
+    while read -r line; do
+        dst=`echo ${line} | sed s/${2}//g`
+        echo "${1}/${line}\n-> ${1}/${dst}"
+    done <<< "${src}"
+
+    ask_ok
+
+    while read -r line; do
+        dst=`echo ${line} | sed s/${2}//g`
+        sudo ln -s "${1}/${line}" "${1}/${dst}"
+    done <<< "${src}"
 }
 
 alias turnoff='xset dpms force off'
