@@ -111,3 +111,18 @@ ln_version() {
 
 alias turnoff='xset dpms force off'
 alias turnon='xset dpms force on'
+
+
+gitopen(){
+  REPO="$(git remote -v | grep fetch | sed 's/origin//' | tr ':' '/' | sed 's/.*git@/http:\/\//' | sed 's/.git *([a-z]*)//')"
+  if [ "$(whereis xdg-open)" ] ; then
+    cmd="xdg-open"
+  else
+    cmd="open"
+  fi
+  $cmd "$REPO"
+}
+
+wgetpages(){
+    wget -r -l1 -w2 --random-wait -p -k $@
+}
