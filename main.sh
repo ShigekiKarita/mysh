@@ -112,6 +112,11 @@ ln_version() {
 alias turnoff='xset dpms force off'
 alias turnon='xset dpms force on'
 
+gitup() {
+    git add -A
+    git commit -m "${1}"
+    git push -u origin master
+}
 
 gitopen(){
   REPO="$(git remote -v | grep fetch | sed 's/origin//' | tr ':' '/' | sed 's/.*git@/http:\/\//' | sed 's/.git *([a-z]*)//')"
