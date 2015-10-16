@@ -1,3 +1,6 @@
-# mysh
+# これなしで生きていけないシェル関数
 
-maybe require zsh
+TODO
++ help 充実させる (自分で忘れてきた)
++ usage 関数で全部表示できるようにする
+
