@@ -140,3 +140,14 @@ archive() {
     2=${2:-$filename}
     tar -acvf $1 $2
 }
+
+findrm() {
+    find . -name "${1}"
+    ask_ok
+    find . -name "${1}" -exec rm -rvf {} \;
+}
+
+rm_dropbox_garbage() {
+    # TODO show diff neatly
+    findrm "*conflicted copy"
+}
