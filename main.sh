@@ -131,3 +131,12 @@ gitopen(){
 wgetpages(){
     wget -r -l1 -w2 --random-wait -p -k $@
 }
+
+alias extract="tar -xvf"
+
+archive() {
+    filename=$(basename ${1})
+    filename=${filename%.*}
+    2=${2:-$filename}
+    tar -acvf $1 $2
+}
