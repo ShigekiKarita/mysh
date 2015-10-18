@@ -18,6 +18,7 @@ EOF
 
 alias gitzatsu='gitup "雑なコミット"'
 
+# remote repository url をブラウザで開く
 gitopen(){
   REPO="$(git remote -v | grep fetch | sed 's/origin//' | tr ':' '/' | sed 's/.*git@/http:\/\//' | sed 's/.git *([a-z]*)//')"
   if [ "$(whereis xdg-open)" ] ; then
@@ -27,3 +28,9 @@ gitopen(){
   fi
   $cmd "$REPO"
 }
+
+alias gitdiff='git diff --color-words --find-renames'
+alias gitlog='git log --graph --decorate --oneline'
+alias gitlogdiff='gitlog -p --stat --find-renames'
+alias gitlogfile='git log --follow'
+alias gitdiffname='gitdiff --name-only'
