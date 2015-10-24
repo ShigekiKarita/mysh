@@ -8,3 +8,5 @@ alias pbpaste='xsel --clipboard --output'
 alias caps2ctrl='setxkbmap -option ctrl:nocaps'
 alias open=xdg-open
 export EDITOR=emacs
+
+alias reset-mouse='sudo modprobe -r psmouse &&  sudo modprobe psmouse'
