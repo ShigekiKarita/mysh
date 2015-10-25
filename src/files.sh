@@ -16,7 +16,7 @@ convert2mp3() {
 
 dirsize() {
     1=${1:-"."}
-    du -s $1/* | sort -rn
+    du -s $1/* $1/.* | sort -rn
 }
 
 ln_version() {
