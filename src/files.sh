@@ -16,8 +16,14 @@ convert2mp3() {
 
 dirsize() {
     1=${1:-"."}
+    du -s $1/* | sort -rn
+}
+
+dirsizes() {
+    1=${1:-"."}
     du -s $1/* $1/.* | sort -rn
 }
+
 
 ln_version() {
     src=`ls "${1}" | grep -e "${2}"`
