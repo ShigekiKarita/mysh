@@ -11,3 +11,7 @@ export EDITOR=emacs
 
 alias reset-mouse='sudo modprobe -r psmouse &&  sudo modprobe psmouse'
 alias reset-keyboard='setxkbmap -rules evdev -model jp106 -layout jp'
+
+rg() {
+    $@ < /dev/null >/dev/null 2>/dev/null &
+}
