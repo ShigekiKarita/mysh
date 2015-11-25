@@ -38,8 +38,9 @@ convert2pdf() {
 
 convert2pdf_all() {
     dirs=` ls -F | grep / | sed 's/\(.*\)/\1/g' | sed 's/\(.*\)\//\1/g'`
-    while read -r line; do
-        echo "$line"
-        convert2pdf "$line"
-    done <<< $dirs
+    echo $dirs | parallel convert2pdf {}
+    # while read -r line; do
+    #     echo "$line"
+    #     convert2pdf "$line"
+    # done <<< $dirs
 }

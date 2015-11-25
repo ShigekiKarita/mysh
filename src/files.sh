@@ -63,3 +63,7 @@ rm_dropbox_garbage() {
     # TODO show diff neatly
     findrm "*conflicted copy*"
 }
+
+unar_all() {
+    find . -name "${1}" | parallel unar {} \;
+}
