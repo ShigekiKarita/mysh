@@ -5,6 +5,13 @@ mv_ext() {
     done
 }
 
+lns_ext() {
+    for nm in *.${1}; do
+        ln -s $nm ${nm%.${1}}.${2};
+    done
+}
+
+
 # require ffmpeg
 convert2mp3() {
     1=${1:-"128"}
