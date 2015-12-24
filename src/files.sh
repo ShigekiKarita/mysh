@@ -7,7 +7,7 @@ mv_ext() {
 
 lns_ext() {
     for nm in *.${1}; do
-        ln -s $nm ${nm%.${1}}.${2};
+        ln -s `pwd`/$nm ${nm%.${1}}.${2};
     done
 }
 
@@ -73,4 +73,10 @@ rm_dropbox_garbage() {
 
 unar_all() {
     find . -name "${1}" | parallel unar {} \;
+}
+
+
+flv2mp4() {
+    find . -name "*.flv" -exec ffmpeg -i {} -c:v libx264 -crf 19 -strict experimental {}.mp4 \;
+    mv_ext flv.mp4 mp4 # fix extension
 }

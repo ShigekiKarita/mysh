@@ -20,7 +20,7 @@ alias gitzatsu='gitup "雑なコミット"'
 
 # remote repository url をブラウザで開く
 gitopen(){
-  REPO="$(git remote -v | grep fetch | sed 's/origin//' | tr ':' '/' | sed 's/.*git@/http:\/\//' | sed 's/.git *([a-z]*)//')"
+  REPO="$(git remote -v | grep fetch | sed 's/origin//' | tr ':' '/' | sed 's/.*git@/http:\/\//' | sed 's/.git *([a-z]*)//' | head -n 1)"
   if [ "$(whereis xdg-open)" ] ; then
     cmd="xdg-open"
   else

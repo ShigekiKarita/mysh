@@ -15,3 +15,7 @@ alias reset-keyboard='setxkbmap -rules evdev -model jp106 -layout jp'
 rg() {
     $@ < /dev/null >/dev/null 2>/dev/null &
 }
+
+alias cowsays='cowsay -l | grep -v "^Cow" | sed -e "s% %\n%g" | sed -e "s%\(.*\)%cowsay -f \1 Now I am a \1%" | sh | less'
+
+alias which_pid='ps aux | grep '
