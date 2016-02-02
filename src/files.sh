@@ -21,6 +21,10 @@ convert2mp3() {
     mv_ext flac.mp3 mp3 # fix extension
 }
 
+extract_audio() {
+    ffmpeg -i $1 -vn -acodec copy $2
+}
+
 dirsize() {
     1=${1:-"."}
     du -s $1/* | sort -rn
@@ -79,4 +83,24 @@ unar_all() {
 flv2mp4() {
     find . -name "*.flv" -exec ffmpeg -i {} -c:v libx264 -crf 19 -strict experimental {}.mp4 \;
     mv_ext flv.mp4 mp4 # fix extension
+}
+
+
+
+alias nkfo='nkf -wLu --overwrite'
+
+
+# text
+find_str() {
+    find ${1} -type f -print | xargs grep ${2}
+}
+
+replace_str() {
+    find ${1} -type f | xargs sed -i 's/${2}/${3}/g'
+}
+
+
+# statistics
+average-of() {
+    tail -n 42 | sed 's/.*${1}: \?\([0-9\.-]*\).*/\1/' | awk '{ total += $1; count++ } END { print total/count }'
 }
