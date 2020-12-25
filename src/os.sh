@@ -10,7 +10,7 @@ alias open=xdg-open
 export EDITOR=emacs
 
 alias reset-mouse='sudo modprobe -r psmouse &&  sudo modprobe psmouse'
-alias reset-keyboard='setxkbmap -rules evdev -model jp106 -layout jp'
+alias reset-keyboard='setxkbmap -rules evdev -model jp106 -layout jp -option ctrl:nocaps'
 
 rg() {
     # for tmux
